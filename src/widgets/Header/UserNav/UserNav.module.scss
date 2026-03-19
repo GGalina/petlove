@@ -1,8 +1,14 @@
 .usernav {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   gap: 8px;
+
+  @include tablet {
+    flex-direction: row;
+  }
 
   &__login {
     font-family: $font-primary;
@@ -11,11 +17,18 @@
     letter-spacing: -3%;
     color: $color-white;
     background-color: $color-yellow;
-    border: 1px solid $color-yellow;
+    border: 1px solid $color-beige;
     border-radius: 20px;
     text-decoration: none;
     text-transform: uppercase;
     padding: 15px 35px;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+
+    @include tablet {
+      width: auto;
+    }
 
     &:hover{
       background-color: $color-beige;
@@ -35,6 +48,13 @@
     text-decoration: none;
     text-transform: uppercase;
     padding: 15px 20px;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+
+    @include tablet {
+      width: auto;
+    }
 
     &:hover{
       background-color: $color-beige-hover;

@@ -10,30 +10,33 @@ export default function Header() {
 
   return (
     <>
-    <header className={styles.header}>
-      <div className={styles.header__left}>
-        <Logo />
-      </div>
+      <header className={styles.header}>
+        <div className={styles.header__left}>
+          <Logo />
+        </div>
 
-      <nav className={styles.header__nav}>
-        <Nav />
-      </nav>
+        {/* Desktop nav */}
+        <nav className={styles.header__nav}>
+          <Nav />
+        </nav>
 
-      <div className={styles.header__right}>
-        <UserNav />
+        <div className={styles.header__right}>
+          {/* Tablet + Desktop */}
+          <div className={styles.header__userNav}>
+            <UserNav />
+          </div>
 
-        <button
-          className={styles.header__burger}
-          onClick={() => setBurgerOpen(!burgerOpen)}
-        >
-          <RxHamburgerMenu size={24} />
-        </button>
-      </div>
+          {/* Mobile + Tablet */}
+          <button
+            className={styles.header__burger}
+            onClick={() => setBurgerOpen(!burgerOpen)}
+          >
+            <RxHamburgerMenu size={24} />
+          </button>
+        </div>
+      </header>
 
-      
-    </header>
-
-    {/* Backdrop overlay */}
+      {/* Backdrop */}
       {burgerOpen && (
         <div
           className={styles.header__backdrop}
@@ -41,19 +44,27 @@ export default function Header() {
         >
           <div
             className={styles.header__mobileNav}
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside menu
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               className={styles.header__close}
               onClick={() => setBurgerOpen(false)}
             >
-              <RxCross2 size={24} />
+              <RxCross2 size={24} color="white"/>
             </button>
-            <Nav />
-            <UserNav />
+
+            {/* Center */}
+            <div className={styles.header__mobileCenter}>
+              <Nav />
+            </div>
+
+            {/* Bottom */}
+            <div className={styles.header__mobileBottom}>
+              <UserNav />
+            </div>
           </div>
         </div>
       )}
-      </>
+    </>
   );
-}
+};

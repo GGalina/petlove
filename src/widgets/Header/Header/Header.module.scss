@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px; 
+  padding: 32px;
   position: relative;
   box-sizing: border-box;
 
@@ -11,10 +11,11 @@
     align-items: center;
   }
 
+  /* Desktop nav */
   &__nav {
     display: none;
 
-    @include tablet {
+    @include desktop {
       display: flex;
     }
   }
@@ -22,21 +23,30 @@
   &__right {
     display: flex;
     align-items: center;
+  }
 
-    /* Burger button (only mobile) */
-    & .header__burger {
-      display: block; 
-      background: none;
-      border: none;
-      cursor: pointer;
-      margin-left: 16px;
+  &__userNav {
+    display: none;
 
-      @include tablet {
-        display: none;
-      }
+    @include tablet {
+      display: flex;
     }
   }
 
+  /* Burger */
+  &__burger {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 16px;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  /* Backdrop */
   &__backdrop {
     display: flex;
     justify-content: flex-end;
@@ -46,26 +56,22 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    z-index: 5;
-
-    @include tablet {
-      display: none; 
-    }
+    z-index: 10;
   }
 
   &__mobileNav {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 50%;
+    justify-content: space-between; 
+    width: 75%;
     height: 100%;
-    background: $color-white;
+    background: $color-yellow;
     padding: 32px;
     position: relative;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 
     @include tablet {
-      display: none;
+      width: 50%;
     }
   }
 
@@ -77,4 +83,20 @@
     border: none;
     cursor: pointer;
   }
-}
+
+  &__mobileCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+
+  &__mobileBottom {
+    display: flex;
+    justify-content: center;
+
+    @include tablet {
+      display: none;
+    }
+  }
+};
