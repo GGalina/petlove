@@ -1,0 +1,44 @@
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-family: $font-primary;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 28px;
+  color: $color-black;
+  margin: 0;
+  letter-spacing: -4%;
+  padding-bottom: 12px;
+
+  @include tablet {
+    font-size: 54px;
+    line-height: 54px;
+    padding-bottom: 16px;
+  }
+}
+
+.accent {
+  color: rgba($color-yellow, 0.4);
+}
+
+.desc {
+  font-family: $font-primary;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: $color-black;
+  margin: 0;
+    letter-spacing: -2%;
+
+
+  @include tablet {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+}
