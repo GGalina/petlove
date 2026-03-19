@@ -1,0 +1,59 @@
+@use "./variables" as *;
+// --------------------------------------
+// Responsive Media Query Mixins
+// --------------------------------------
+
+// Mobile small (320px)
+@mixin mobile-small {
+  @media (min-width: #{$breakpoint-mobile-small}) {
+    @content;
+  }
+}
+
+// Mobile adaptive (from 375px)
+@mixin mobile {
+  @media (min-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+// Tablet (from 768px)
+@mixin tablet {
+  @media (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+// Desktop (from 1280px)
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+// --------------------------------------
+// Retina Images
+// --------------------------------------
+// @mixin retina($property, $url, $width: null, $height: null) {
+//   #{$property}: url($url);
+
+//   @media (-webkit-min-device-pixel-ratio: $min-retina), (min-resolution: 192dpi) {
+//     #{$property}: url($url);
+//     @if $width != null {
+//       width: $width;
+//     }
+//     @if $height != null {
+//       height: $height;
+//     }
+//   }
+// }
+
+// // --------------------------------------
+// // Font mixin
+// // --------------------------------------
+// @mixin font($weight: 400, $size: 16px, $line-height: 1.5) {
+//   font-family: $font-primary;
+//   font-weight: $weight;
+//   font-size: $size;
+//   line-height: $line-height;
+// }

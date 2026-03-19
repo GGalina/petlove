@@ -1,0 +1,27 @@
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: $font-primary;
+  font-weight: 700; 
+  line-height: 28px;
+  letter-spacing: -4%;
+  color: $color-black;
+  font-size: 28px;  
+
+
+  &__text {
+    margin: 0 4px;
+  }
+
+  &__heart {
+    color: $color-yellow; 
+    width: 11px;
+    height: 13px;
+
+    @include tablet {
+    width: 16px;
+    height: 18px;
+  }
+
+  }
+}

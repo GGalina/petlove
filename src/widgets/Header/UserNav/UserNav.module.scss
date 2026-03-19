@@ -1,0 +1,44 @@
+.usernav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  &__login {
+    font-family: $font-primary;
+    font-weight: 700; 
+    line-height: 20px;
+    letter-spacing: -3%;
+    color: $color-white;
+    background-color: $color-yellow;
+    border: 1px solid $color-yellow;
+    border-radius: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 15px 35px;
+
+    &:hover{
+      background-color: $color-beige;
+      color: $color-yellow-hover;
+    }
+  }
+
+  &__register {
+    font-family: $font-primary;
+    font-weight: 700; 
+    line-height: 20px;
+    letter-spacing: -3%;
+    color: $color-yellow;
+    background-color: $color-beige;
+    border: 1px solid $color-beige;
+    border-radius: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 15px 20px;
+
+    &:hover{
+      background-color: $color-beige-hover;
+      color: $color-yellow;
+    }
+  }
+}
