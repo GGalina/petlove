@@ -46,7 +46,7 @@ export default function RegistrationForm() {
 
       reset();
     } catch (err) {
-      toast.error(err.message || "Registration failed.Please try again.");
+      toast.error(err.message || "Registration failed. Please try again.");
     }
   };
 

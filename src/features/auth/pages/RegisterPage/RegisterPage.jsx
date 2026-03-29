@@ -4,9 +4,9 @@ import RegistrationForm from "@/features/auth/components/RegistrationForm/Regist
 import styles from "./RegisterPage.module.scss";
 import { Link } from "react-router-dom";
 
-import mobileImg from "@/assets/images/login-mob.jpg";
-import tabletImg from "@/assets/images/login-tablet.jpg";
-import desktopImg from "@/assets/images/login-desk.jpg";
+import mobileImg from "@/assets/images/register-mob.jpg";
+import tabletImg from "@/assets/images/register-tablet.jpg";
+import desktopImg from "@/assets/images/register-desk.jpg";
 
 export default function RegisterPage() {
   return (
