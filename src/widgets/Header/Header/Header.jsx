@@ -8,6 +8,10 @@ import styles from "./Header.module.scss";
 export default function Header() {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
+  const handleLinkClick = () => {
+    setBurgerOpen(false);
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -23,7 +27,7 @@ export default function Header() {
         <div className={styles.header__right}>
           {/* Tablet + Desktop */}
           <div className={styles.header__userNav}>
-            <AuthNav />
+            <AuthNav onLinkClick={handleLinkClick}/>
           </div>
 
           {/* Mobile + Tablet */}
@@ -55,12 +59,12 @@ export default function Header() {
 
             {/* Center */}
             <div className={styles.header__mobileCenter}>
-              <Nav />
+              <Nav onLinkClick={handleLinkClick} />
             </div>
 
             {/* Bottom */}
             <div className={styles.header__mobileBottom}>
-              <AuthNav />
+              <AuthNav onLinkClick={handleLinkClick} />
             </div>
           </div>
         </div>

@@ -6,9 +6,9 @@ export default function HomeLayout() {
   return (
     <div className={styles.layout}>
       <HomeHeader />
-      <main className={styles.main}>
+      <>
         <Outlet />
-      </main>
+      </>
     </div>
   );
 }

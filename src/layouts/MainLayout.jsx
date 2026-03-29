@@ -6,9 +6,9 @@ export default function MainLayout() {
   return (
     <div className={styles.layout}>
       <Header />
-      <main className={styles.main}>
+      <>
         <Outlet />
-      </main>
+      </>
     </div>
   );
 }

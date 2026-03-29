@@ -1,0 +1,13 @@
+.friendsList {
+  display: grid;
+  grid-template-columns: 1fr; // 1 column by default
+  gap: 20px;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr; // 2 columns on tablet
+  }
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr 1fr; // 3 columns on desktop
+  }
+}

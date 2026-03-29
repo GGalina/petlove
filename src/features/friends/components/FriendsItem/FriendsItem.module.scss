@@ -1,0 +1,76 @@
+.friendsItem {
+    background: $color-white;
+    border-radius: 16px;
+    padding: 20px;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    &__logo {
+        width: 80px;
+        margin-bottom: 12px;
+    }
+
+    &__companyName {
+        font-family: $font-primary;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: -4%;
+
+        a {
+            text-decoration: none;
+            color: $color-black;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    &__miniTitle {
+        font-family: $font-primary;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: -2%;
+        color: rgba($color-black, 0.5);
+    }
+
+    &__info {
+        font-family: $font-primary;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: -2%;
+        color: $color-black;
+    }
+
+    &__hoursContainer {
+        position: absolute;
+        border: 1px solid $color-beige;
+        border-radius: 30px;
+        background-color: $color-beige;
+        padding: 8px;
+        top: 12px;
+        right: 12px;
+    }
+
+  &__hours {
+        font-family: $font-primary;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: -2%;
+        color: $color-yellow;
+  }
+}

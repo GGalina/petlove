@@ -7,7 +7,7 @@ export default function Title({
   className = "" 
 }) {
   return (
-    <div className={`${styles.title__container} ${className}`}>
+    <div className={`${styles.title__container} ${className || ""}`}>
       <div className={styles.title__content}>
         <h1 className={styles.title}>
           {text}{" "}

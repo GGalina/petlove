@@ -8,6 +8,10 @@ import styles from "./HomeHeader.module.scss";
 export default function HomeHeader() {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
+  const handleLinkClick = () => {
+    setBurgerOpen(false);
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -17,13 +21,13 @@ export default function HomeHeader() {
 
         {/* Desktop nav */}
         <nav className={styles.header__nav}>
-          <HomeNav />
+          <HomeNav onLinkClick={handleLinkClick} />
         </nav>
 
         <div className={styles.header__right}>
           {/* Tablet + Desktop */}
           <div className={styles.header__userNav}>
-            <HomeAuthNav />
+            <HomeAuthNav onLinkClick={handleLinkClick} />
           </div>
 
           {/* Mobile + Tablet */}
@@ -36,7 +40,7 @@ export default function HomeHeader() {
         </div>
       </header>
 
-      {/* Backdrop */}
+      {/* Mobile menu */}
       {burgerOpen && (
         <div
           className={styles.header__backdrop}
@@ -50,21 +54,21 @@ export default function HomeHeader() {
               className={styles.header__close}
               onClick={() => setBurgerOpen(false)}
             >
-              <RxCross2 size={24} color="black"/>
+              <RxCross2 size={24} color="black" />
             </button>
 
-            {/* Center */}
+            {/* Center navigation */}
             <div className={styles.header__mobileCenter}>
-              <HomeNav />
+              <HomeNav onLinkClick={handleLinkClick} />
             </div>
 
-            {/* Bottom */}
+            {/* Bottom user links */}
             <div className={styles.header__mobileBottom}>
-              <HomeAuthNav />
+              <HomeAuthNav onLinkClick={handleLinkClick} />
             </div>
           </div>
         </div>
       )}
     </>
   );
-};
+}
