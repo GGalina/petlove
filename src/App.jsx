@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import MainLayout from "@/layouts/MainLayout";
 import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
@@ -18,6 +20,7 @@ import NotFoundPage from "@/features/notfound/pages/NotFoundPage";
 
 export default function App() {
   return (
+    <>
     <Routes>
 
       <Route element={<HomeLayout />}>
@@ -42,7 +45,9 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
 
       </Route>
-
+    
     </Routes>
+    <ToastContainer position="top-right" autoClose={3000} />
+  </>
   );
 }

@@ -1,43 +1,38 @@
 import PetBlock from "@/shared/components/PetBlock/PetBlock";
 import Title from "@/shared/components/Title/Title";
+import RegistrationForm from "@/features/auth/components/RegistrationForm/RegistrationForm";
 import styles from "./RegisterPage.module.scss";
 import { Link } from "react-router-dom";
 
-
+import mobileImg from "@/assets/images/login-mob.jpg";
+import tabletImg from "@/assets/images/login-tablet.jpg";
+import desktopImg from "@/assets/images/login-desk.jpg";
 
 export default function RegisterPage() {
   return (
     <div className={styles.register}>
-      {/* Left / Top */}
       <div className={styles.register__media}>
         <PetBlock
           mobileSrc={mobileImg}
           tabletSrc={tabletImg}
           desktopSrc={desktopImg}
-          alt="Pet"
+          alt="Pet cat"
         />
       </div>
 
-      {/* Right / Bottom */}
       <div className={styles.register__content}>
         <Title
-          text="Create your"
-          accentText="account"
-          description="Join PetLove and take the best care of your pets."
+          text="Registration"
+          description="Thank you for your interest in our platform."
         />
 
-        <form className={styles.register__form}>
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <input type="password" placeholder="Confirm Password" />
-
-          <button type="submit">Register</button>
-        </form>
+        <RegistrationForm />
 
         <p className={styles.register__footer}>
           Already have an account?{" "}
-          <Link to="/login">Login</Link>
+          <Link to="/login" className={styles.register__footerlink}>
+            Login
+          </Link>
         </p>
       </div>
     </div>

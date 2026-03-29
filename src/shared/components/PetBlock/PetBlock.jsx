@@ -1,6 +1,11 @@
 import styles from "./PetBlock.module.scss";
 
-export default function PetBlock({ src, alt = "", className = "" }) {
+export default function PetBlock({  mobileSrc,
+    tabletSrc,
+    desktopSrc,
+    alt = "",
+    className=""
+}) {
   return (
     <div className={`${styles.imageBlock} ${className}`}>
       <picture>

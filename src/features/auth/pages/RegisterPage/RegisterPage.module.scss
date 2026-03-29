@@ -1,0 +1,77 @@
+.register {
+    width: 100%;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    @include desktop {
+        flex-direction: row;
+        gap: 32px;
+        height: 100vh;
+    }
+
+    &__media {
+        width: 100%; 
+        padding-bottom: 10px;
+        border-radius: 30px;
+
+        @include tablet {
+            border-radius: 60px;
+        }
+
+        @include desktop {
+            width: 50%;
+            height: 100%;
+        }
+    }
+
+    &__content {
+        background-color: $color-white;
+        padding: 27px 20px;
+        border-radius: 30px;
+
+        @include tablet {
+            border-radius: 60px;
+        }
+
+
+        @include desktop {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    &__footer {
+        font-family: $font-primary;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 14px;
+        letter-spacing: -3%;
+        color: rgba($color-black, 0.5);
+        text-align: center;
+
+        @include tablet {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    &__footerlink {
+        font-family: $font-primary;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 14px;
+        letter-spacing: -3%;
+        color: $color-yellow;
+        text-decoration: none;
+
+        @include tablet {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+}
