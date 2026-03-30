@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "@/features/auth/validation/registerSchema";
 import { signup } from "@/features/auth/api/authApi";
@@ -15,6 +16,7 @@ import CrossIcon from "@/assets/icons/cross.svg?react";
 export default function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -42,6 +44,7 @@ export default function RegistrationForm() {
 
       if (res?.token) {
         localStorage.setItem("token", res.token);
+        navigate("/profile"); 
       }
 
       reset();

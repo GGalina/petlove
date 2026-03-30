@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Title from "@/shared/components/Title/Title";
 import FriendsList from "@/features/friends/components/FriendsList/FriendsList";
+import Loader from "@/shared/components/Loader/Loader";
 import { getFriends } from "@/features/friends/api/friendsApi";
 import styles from "./FriendsPage.module.scss";
 
@@ -29,7 +30,7 @@ const FriendsPage = () => {
     <section className={styles.friendsPage}>
       <Title text="Our friends" className={styles.customTitle} />
   
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
       {error && <p>{error}</p>}
 
       {!loading && !error && (
