@@ -1,0 +1,44 @@
+.searchField {
+  position: relative;
+  width: 100%;
+
+  @include tablet {
+    max-width: 230px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px 88px 12px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+
+    @include tablet {
+      padding: 14px 88px 14px 14px;
+    }
+  }
+
+  &__clear,
+  &__submit {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__clear {
+    right: 44px;
+    color: $color-black;
+  }
+
+  &__submit {
+    right: 16px;
+    color: $color-black
+  }
+}

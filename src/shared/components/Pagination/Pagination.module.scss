@@ -1,0 +1,37 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+
+  button {
+    font-family: $font-primary;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+    color: $color-black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba($color-black, 0.2);
+    background: transparent;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: $color-yellow-hover;
+      color: $color-white;
+    }
+
+    &.pagination__active {
+      font-weight: 700;
+      border: 2px solid $color-yellow;
+      background-color: $color-yellow;
+      color: $color-white;
+    }
+  }
+}
