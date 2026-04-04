@@ -1,15 +1,8 @@
-// Main SCSS file that imports variables, mixins, and fonts, and defines global styles
-// @import "./variables";
-// @import "./mixins";
-// @import "./fonts";
-
-// Global styles
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 16px;
   font-family: "Manrope", sans-serif;
   background: #F9F9F9;
 }
@@ -20,6 +13,7 @@ main {
 
 html, body, #root {
   height: 100%;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, p {
