@@ -53,6 +53,7 @@
         letter-spacing: -3%;
         color: rgba($color-black, 0.5);
         text-align: center;
+        margin-top: 12px;
 
         @include tablet {
             font-size: 14px;

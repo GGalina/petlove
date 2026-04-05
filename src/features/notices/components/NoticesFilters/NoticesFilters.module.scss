@@ -8,6 +8,45 @@
   border-radius: 30px;
   margin-bottom: 40px;
 
+  @include tablet{
+    padding: 40px 32px;
+  }
+
+  @include desktop {
+    padding: 40px;
+  }
+
+  &__styleWrap {
+    width: 100%;
+    display: grid;
+    gap: 12px;
+    background: $color-beige;
+    border-radius: 30px;
+
+    grid-template-columns: 1fr;
+    
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+  }
+
+  &__secondWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+
   &__select {
     width: 100%;
   }
@@ -70,6 +109,10 @@
     display: flex;
     gap: 8px;
     width: 100%;
+
+    @include tablet {
+      width: auto;
+    }
   }
 
   &__divider {
@@ -109,12 +152,17 @@
     outline: none;
     cursor: pointer;
     transition: all 0.2s ease;
+
+    @include tablet {
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: -3%;
+    }
   }
 
   &__sortButton--active {
-    background: #f6b83d;
-    border-color: #f6b83d;
-    color: white;
+    background: $color-yellow;
+    color: $color-white;
   }
 
   &__sortClose {
@@ -124,47 +172,6 @@
 
 }
 
-:global(.select__control) {
-  width: 100%;
-  min-height: 48px;
-  border-radius: 30px;
-  box-shadow: none;
+.customSearch {
+  max-width: unset;
 }
-
-:global(.select__control:hover) {
-  border: 1px solid $color-yellow-hover;
-}
-
-:global(.select__dropdown-indicator) {
-  color: $color-black;
-}
-
-:global(.select__dropdown-indicator:hover) {
-  color: $color-black;
-}
-
-:global(.select__indicator-separator) {
-  display: none;
-}
-
-:global(.select__menu) {
-  margin-top: 8px;
-  border-radius: 15px;
-  overflow: hidden;
-  border: 1px solid $color-white;
-  color: rgba($color-black, 0.6);
-  box-shadow: none;
-  text-transform: capitalize;
-}
-
-:global(.select__menu-list) {
-  padding: 8px;
-}
-
-:global(.select__option) {
-  padding: 10px 14px;
-  border-radius: 12px;
-  color: rgba($color-black, 0.6);
-  cursor: pointer;
-}
-

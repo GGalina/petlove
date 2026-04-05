@@ -5,6 +5,8 @@ import { loginSchema } from "@/features/auth/validation/loginSchema";
 import { login } from "@/features/auth/api/authApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAuth } from "@/store/authSlice";
 
 import styles from "./LoginForm.module.scss";
 
@@ -15,7 +17,8 @@ import CrossIcon from "@/assets/icons/cross.svg?react";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -41,9 +44,16 @@ export default function LoginForm() {
       toast.success("Login successful!");
 
       if (res?.token) {
-        localStorage.setItem("token", res.token);
+        // Save token and user in Redux (also saved to localStorage by your slice)
+        dispatch(
+          setAuth({
+            token: res.token,
+            user: { email: res.email, name: res.name },
+          })
+        );
 
-        navigate("/profile");
+        // Always redirect to profile
+        navigate("/profile", { replace: true });
       }
 
       reset();
@@ -54,7 +64,6 @@ export default function LoginForm() {
 
   const renderValidationIcon = (field) => {
     if (!touchedFields[field]) return null;
-
     return errors[field] ? (
       <CrossIcon className={styles.form__icon} />
     ) : (
@@ -74,9 +83,7 @@ export default function LoginForm() {
         />
         {renderValidationIcon("email")}
         {errors.email && (
-          <p className={styles.form__fieldError}>
-            {errors.email.message}
-          </p>
+          <p className={styles.form__fieldError}>{errors.email.message}</p>
         )}
       </div>
 
@@ -88,7 +95,6 @@ export default function LoginForm() {
           className={styles.form__input}
           {...register("password")}
         />
-
         <button
           type="button"
           className={styles.form__eye}
@@ -96,12 +102,9 @@ export default function LoginForm() {
         >
           {showPassword ? <EyeIcon /> : <EyeOffIcon />}
         </button>
-
         {renderValidationIcon("password")}
         {errors.password && (
-          <p className={styles.form__fieldError}>
-            {errors.password.message}
-          </p>
+          <p className={styles.form__fieldError}>{errors.password.message}</p>
         )}
       </div>
 

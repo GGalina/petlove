@@ -4,4 +4,10 @@
 
 .customTitle {
     align-items: unset;
+
+    @include tablet {
+        :global([class*="title__content"]) {
+            max-width: none;
+        }
+    }
 }

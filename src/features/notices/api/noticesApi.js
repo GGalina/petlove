@@ -121,3 +121,66 @@ export const fetchCities = async (keyword) => {
     return [];
   }
 };
+
+export const fetchNoticeById = async (id) => {
+    try {
+        const { data } = await axiosInstance.get(`/notices/${id}`);
+        return data;
+    } catch (error) {
+        if (error.response) {
+            throw new Error(
+            error.response.data.message || "Failed to fetch pet information."
+            );
+        }
+
+        if (error.request) {
+            throw new Error(
+            "No response from server. Please check your network connection."
+            );
+        }
+
+        throw new Error(error.message || "Unexpected error occurred.");
+    }
+};
+
+export const addToFavorite = async (id) => {
+    try {
+        const { data } = await axiosInstance.post(`/notices/favorites/add/${id}`);
+        return data;
+    } catch (error) {
+        if (error.response) {
+            throw new Error(
+            error.response.data.message || "Failed to add to favorites"
+            );
+        }
+
+        if (error.request) {
+            throw new Error(
+            "No response from server. Please check your network connection."
+            );
+        }
+
+        throw new Error(error.message || "Unexpected error occurred.");
+    }
+};
+
+export const removeFromFavorite = async (id) => {
+    try {
+        const { data } = await axiosInstance.delete(`/notices/remove/add/${id}`);
+        return data;
+    } catch (error) {
+        if (error.response) {
+            throw new Error(
+            error.response.data.message || "Failed to add to favorites"
+            );
+        }
+
+        if (error.request) {
+            throw new Error(
+            "No response from server. Please check your network connection."
+            );
+        }
+
+        throw new Error(error.message || "Unexpected error occurred.");
+    }
+};

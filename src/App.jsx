@@ -1,3 +1,4 @@
+// src/App.jsx
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,36 +19,53 @@ import AddPetPage from "@/features/pets/pages/AddPetPage";
 
 import NotFoundPage from "@/features/notfound/pages/NotFoundPage";
 
+import PrivateRoute from "@/routes/PrivateRoute";
+
 export default function App() {
   return (
     <>
-    <Routes>
+      <Routes>
+        {/* Home page layout */}
+        <Route element={<HomeLayout />}>
+          <Route path="/home" element={<HomePage />} />
+        </Route>
 
-      <Route element={<HomeLayout />}>
-        <Route path="/home" element={<HomePage />} />
-      </Route>
+        {/* Main app layout */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Navigate to="/home" replace />} />
 
-      <Route element={<MainLayout />}>
+          {/* Public pages */}
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/notices" element={<NoticesPage />} />
+          <Route path="/friends" element={<FriendsPage />} />
 
-        <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/notices" element={<NoticesPage />} />
-        <Route path="/friends" element={<FriendsPage />} />
+          {/* Private pages for logged-in users only */}
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/add-pet"
+            element={
+              <PrivateRoute>
+                <AddPetPage />
+              </PrivateRoute>
+            }
+          />
 
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+          {/* Catch-all */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
 
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/add-pet" element={<AddPetPage />} />
-
-        <Route path="*" element={<NotFoundPage />} />
-
-      </Route>
-    
-    </Routes>
-    <ToastContainer position="top-right" autoClose={3000} />
-  </>
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
   );
 }

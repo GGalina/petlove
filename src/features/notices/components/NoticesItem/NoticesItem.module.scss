@@ -8,6 +8,10 @@
   background-color: $color-white;
   border: none;
 
+  @include tablet {
+    justify-content: space-between;
+  }
+
   &__image {
     width: 100%;
     min-width: 287px;
@@ -29,6 +33,11 @@
     font-weight: 700;
     line-height: 20px;
     color: $color-black;
+
+    @include tablet {
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
 
   &__popularityWrapper {
@@ -86,6 +95,11 @@
     font-weight: 700;
     color: $color-black;
     margin-bottom: 12px;
+
+    @include tablet {
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
 
   &__actions {
@@ -109,6 +123,11 @@
     &:hover {
       background-color: $color-yellow-hover;
     }
+
+    @include tablet {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 
   &__favorite {
@@ -126,6 +145,10 @@
 
     &:hover {
       background-color: $color-beige-hover;
+    }
+
+    @include tablet {
+      padding: 15px;
     }
   }
 }
