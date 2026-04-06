@@ -9,7 +9,6 @@ const getWorkingHours = (workDays) => {
   return `${openDay.from} - ${openDay.to}`;
 };
 
-// Plain text messages, your original ones
 const getEmailContent = (email, phone) => {
   if (email) return email;
   if (phone) return "phone only";

@@ -14,8 +14,7 @@
 
   &__image {
     width: 100%;
-    min-width: 287px;
-    min-height: 178px;
+    height: auto;
     max-height: 350px;
     object-fit: cover;
     border-radius: 16px;
@@ -132,7 +131,6 @@
 
   &__favorite {
     padding: 14px;
-
     display: flex;
     align-items: center;
     justify-content: center;

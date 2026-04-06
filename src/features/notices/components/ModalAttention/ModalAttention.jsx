@@ -8,10 +8,8 @@ const ModalAttention = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    // Lock scroll
     document.body.style.overflow = "hidden";
 
-    // Close on ESC
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
     };

@@ -1,9 +1,9 @@
 import styles from "./NewsItem.module.scss";
 
 const NewsItem = ({ item }) => {
-    const { imgUrl, title, text, date, url } = item;
+  const { imgUrl, title, text, date, url } = item;
 
-    const formattedDate = new Date(date).toLocaleDateString("en-GB");
+  const formattedDate = new Date(date).toLocaleDateString("en-GB");
 
   return (
     <article className={styles.newsItem}>

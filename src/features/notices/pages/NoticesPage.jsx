@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Title from "@/shared/components/Title/Title";
 import NoticesFilters from "@/features/notices/components/NoticesFilters/NoticesFilters";
 import NoticesList from "@/features/notices/components/NoticesList/NoticesList";
@@ -59,11 +59,13 @@ const NoticesPage = () => {
     <div className={styles.noticesPage}>
       <Title text="Find your favorite pet" className={styles.customTitle} />
       <NoticesFilters filters={filters} setFilters={setFilters} />
+
       {notices.length > 0 ? (
         <NoticesList notices={notices} />
       ) : (
         <p className={styles.noticesPage__noResults}>No animals found.</p>
       )}
+      
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}

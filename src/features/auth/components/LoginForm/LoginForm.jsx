@@ -32,8 +32,6 @@ export default function LoginForm() {
     reValidateMode: "onChange",
   });
 
-  const values = watch();
-
   const onSubmit = async (data) => {
     try {
       const res = await login({
@@ -44,7 +42,7 @@ export default function LoginForm() {
       toast.success("Login successful!");
 
       if (res?.token) {
-        // Save token and user in Redux (also saved to localStorage by your slice)
+        // Save token and user in Redux (also saved to localStorage by slice)
         dispatch(
           setAuth({
             token: res.token,
@@ -52,7 +50,6 @@ export default function LoginForm() {
           })
         );
 
-        // Always redirect to profile
         navigate("/profile", { replace: true });
       }
 

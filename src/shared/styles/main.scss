@@ -2,20 +2,29 @@
   box-sizing: border-box;
 }
 
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevent horizontal scroll caused by overflowing elements */
+}
+
 body {
   font-family: "Manrope", sans-serif;
   background: #F9F9F9;
 }
 
 main {
-  padding: 0 ;
-}
-
-html, body, #root {
-  height: 100%;
-  width: 100%;
+  padding: 0;
+  max-width: 100%; /* ensure main content does not overflow */
 }
 
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
+}
+
+img, video {
+  max-width: 100%; /* prevent images from overflowing */
+  height: auto;
 }

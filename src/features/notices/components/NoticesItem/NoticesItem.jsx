@@ -1,22 +1,24 @@
-// src/features/notices/components/NoticesItem/NoticesItem.jsx
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
 import ModalAttention from "@/features/notices/components/ModalAttention/ModalAttention";
 import ModalNotice from "@/features/notices/components/ModalNotice/ModalNotice";
 import { fetchNoticeById } from "@/features/notices/api/noticesApi";
+import { addFavoriteThunk, removeFavoriteThunk } from "@/store/favoritesSlice";
 import { FaStar } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import styles from "./NoticesItem.module.scss";
 
 const NoticesItem = ({ notice }) => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
   const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [selectedNotice, setSelectedNotice] = useState(null); // ✅ state for fetched notice
+  const [selectedNotice, setSelectedNotice] = useState(null);
+  const favoriteIds = useSelector((state) => state.favorites.ids);
+  const isFavorite = favoriteIds.includes(notice._id);
 
-  const token = useSelector((state) => state.auth.token);
   const isAuth = Boolean(token);
 
   const formatDate = (date) => {
@@ -32,7 +34,7 @@ const NoticesItem = ({ notice }) => {
 
     try {
       const noticeData = await fetchNoticeById(notice._id);
-      setSelectedNotice(noticeData); // store fetched data
+      setSelectedNotice(noticeData);
       setIsModalNoticeOpen(true);
     } catch (err) {
       toast.error(err.message);
@@ -44,7 +46,13 @@ const NoticesItem = ({ notice }) => {
       setIsModalAttentionOpen(true);
       return;
     }
-    setIsFavorite((prev) => !prev);
+    if (isFavorite) {
+      dispatch(removeFavoriteThunk(notice._id));
+      toast.success("Pet removed from favorites");
+    } else {
+      dispatch(addFavoriteThunk(notice._id));
+      toast.success("Pet added to favorites");
+    }
   };
 
   return (
@@ -55,6 +63,7 @@ const NoticesItem = ({ notice }) => {
           src={notice.imgURL}
           alt={notice.title}
         />
+
         <div className={styles.noticeItem__titleWrapper}>
           <h3 className={styles.noticeItem__title}>{notice.title}</h3>
           <div className={styles.noticeItem__popularityWrapper}>
@@ -116,7 +125,7 @@ const NoticesItem = ({ notice }) => {
         <ModalNotice
           isOpen={isModalNoticeOpen}
           onClose={() => setIsModalNoticeOpen(false)}
-          notice={selectedNotice} // ✅ pass fetched notice
+          notice={selectedNotice}
         />
       )}
     </>

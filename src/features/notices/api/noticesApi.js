@@ -1,48 +1,48 @@
 import axiosInstance from "@/shared/api/axiosInstance";
 
 export const fetchNotices = async ({
-  page = 1,
-  limit = 6,
-  keyword = "",
-  category = "",
-  species = "",
-  locationId = "",
-  sex = "",
-  byDate = true,
-  byPrice = false,
-  byPopularity = false,
+    page = 1,
+    limit = 6,
+    keyword = "",
+    category = "",
+    species = "",
+    locationId = "",
+    sex = "",
+    byDate = true,
+    byPrice = false,
+    byPopularity = false,
 }) => {
-  try {
-    const { data } = await axiosInstance.get("/notices", {
-      params: {
-        page,
-        limit,
-        keyword,
-        category,
-        species,
-        locationId,
-        sex,
-        byDate,
-        byPrice,
-        byPopularity,
-      },
-    });
+    try {
+        const { data } = await axiosInstance.get("/notices", {
+            params: {
+            page,
+            limit,
+            keyword,
+            category,
+            species,
+            locationId,
+            sex,
+            byDate,
+            byPrice,
+            byPopularity,
+            },
+        });
 
-    return {
-      data: data.results,      // array of notices
-      totalPages: data.totalPages, // total pages for pagination
-    };
-  } catch (error) {
-    if (error.response) {
-      throw new Error(error.response.data.message || "Failed to fetch notices.");
+        return {
+            data: data.results,
+            totalPages: data.totalPages,
+        };
+    } catch (error) {
+        if (error.response) {
+            throw new Error(error.response.data.message || "Failed to fetch notices.");
+        }
+        if (error.request) {
+            throw new Error(
+                "No response from server. Please check your network connection."
+            );
+        }
+        throw new Error(error.message || "Unexpected error occurred.");
     }
-    if (error.request) {
-      throw new Error(
-        "No response from server. Please check your network connection."
-      );
-    }
-    throw new Error(error.message || "Unexpected error occurred.");
-  }
 };
 
 export const fetchCategories = async () => {
@@ -58,7 +58,7 @@ export const fetchCategories = async () => {
 
         if (error.request) {
             throw new Error(
-            "No response from server. Please check your network connection."
+                "No response from server. Please check your network connection."
             );
         }
 
@@ -73,13 +73,13 @@ export const fetchGenders = async () => {
     } catch (error) {
         if (error.response) {
             throw new Error(
-            error.response.data.message || "Failed to fetch pet sex."
+                error.response.data.message || "Failed to fetch pet sex."
             );
         }
 
         if (error.request) {
             throw new Error(
-            "No response from server. Please check your network connection."
+                "No response from server. Please check your network connection."
             );
         }
 
@@ -94,13 +94,13 @@ export const fetchPetTypes = async () => {
     } catch (error) {
         if (error.response) {
             throw new Error(
-            error.response.data.message || "Failed to fetch pet species."
+                error.response.data.message || "Failed to fetch pet species."
             );
         }
 
         if (error.request) {
             throw new Error(
-            "No response from server. Please check your network connection."
+                "No response from server. Please check your network connection."
             );
         }
 
@@ -109,17 +109,19 @@ export const fetchPetTypes = async () => {
 };
 
 export const fetchCities = async (keyword) => {
-  if (!keyword || keyword.length < 3) return []; // API requires min 3 chars
-  try {
-    const { data } = await axiosInstance.get("/cities", { params: { keyword } });
-    return data.map(city => ({
-      value: city._id,
-      label: `${city.cityEn}, ${city.stateEn}`,
-    }));
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
+    if (!keyword || keyword.length < 3) return []; // API requires min 3 chars
+
+    try {
+        const { data } = await axiosInstance.get("/cities", { params: { keyword } });
+
+        return data.map(city => ({
+            value: city._id,
+            label: `${city.cityEn}, ${city.stateEn}`,
+        }));
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
 };
 
 export const fetchNoticeById = async (id) => {
@@ -129,13 +131,13 @@ export const fetchNoticeById = async (id) => {
     } catch (error) {
         if (error.response) {
             throw new Error(
-            error.response.data.message || "Failed to fetch pet information."
+                error.response.data.message || "Failed to fetch pet information."
             );
         }
 
         if (error.request) {
             throw new Error(
-            "No response from server. Please check your network connection."
+                "No response from server. Please check your network connection."
             );
         }
 
@@ -150,13 +152,13 @@ export const addToFavorite = async (id) => {
     } catch (error) {
         if (error.response) {
             throw new Error(
-            error.response.data.message || "Failed to add to favorites"
+                error.response.data.message || "Failed to add to favorites"
             );
         }
 
         if (error.request) {
             throw new Error(
-            "No response from server. Please check your network connection."
+                "No response from server. Please check your network connection."
             );
         }
 
@@ -166,18 +168,18 @@ export const addToFavorite = async (id) => {
 
 export const removeFromFavorite = async (id) => {
     try {
-        const { data } = await axiosInstance.delete(`/notices/remove/add/${id}`);
+        const { data } = await axiosInstance.delete(`/notices/favorites/remove/${id}`);
         return data;
     } catch (error) {
         if (error.response) {
             throw new Error(
-            error.response.data.message || "Failed to add to favorites"
+                error.response.data.message || "Failed to add to favorites"
             );
         }
 
         if (error.request) {
             throw new Error(
-            "No response from server. Please check your network connection."
+                "No response from server. Please check your network connection."
             );
         }
 

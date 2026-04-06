@@ -1,8 +1,8 @@
-import PetBlock from "@/shared/components/PetBlock/PetBlock";
+import { Link } from "react-router-dom";
 import Title from "@/shared/components/Title/Title";
+import PetBlock from "@/shared/components/PetBlock/PetBlock";
 import LoginForm from "@/features/auth/components/LoginForm/LoginForm";
 import styles from "./LoginPage.module.scss";
-import { Link } from "react-router-dom";
 
 import mobileImg from "@/assets/images/login-mob.jpg";
 import tabletImg from "@/assets/images/login-tablet.jpg";

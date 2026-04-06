@@ -1,8 +1,8 @@
-import PetBlock from "@/shared/components/PetBlock/PetBlock";
+import { Link } from "react-router-dom";
 import Title from "@/shared/components/Title/Title";
+import PetBlock from "@/shared/components/PetBlock/PetBlock";
 import RegistrationForm from "@/features/auth/components/RegistrationForm/RegistrationForm";
 import styles from "./RegisterPage.module.scss";
-import { Link } from "react-router-dom";
 
 import mobileImg from "@/assets/images/register-mob.jpg";
 import tabletImg from "@/assets/images/register-tablet.jpg";

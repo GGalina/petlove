@@ -9,6 +9,7 @@ export const fetchNews = async ({ page = 1, limit = 6, search = "" }) => {
             keyword: search,
             },
         });
+        
         return data;
     } catch (error) {
         if (error.response) {

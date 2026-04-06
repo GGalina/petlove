@@ -1,7 +1,4 @@
 @use "./variables" as *;
-// --------------------------------------
-// Responsive Media Query Mixins
-// --------------------------------------
 
 // Mobile small (320px)
 @mixin mobile-small {
@@ -46,14 +43,4 @@
 //       height: $height;
 //     }
 //   }
-// }
-
-// // --------------------------------------
-// // Font mixin
-// // --------------------------------------
-// @mixin font($weight: 400, $size: 16px, $line-height: 1.5) {
-//   font-family: $font-primary;
-//   font-weight: $weight;
-//   font-size: $size;
-//   line-height: $line-height;
 // }

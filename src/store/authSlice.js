@@ -17,15 +17,18 @@ const authSlice = createSlice({
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
     },
+
     clearAuth(state) {
       state.token = null;
       state.user = null;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
+
     setLoading(state, action) {
       state.isLoading = action.payload;
     },
+    
     setError(state, action) {
       state.error = action.payload;
     },

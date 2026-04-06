@@ -1,8 +1,8 @@
-import styles from "./Pagination.module.scss";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import styles from "./Pagination.module.scss";
 
 const getVisiblePages = (current, total) => {
   const pages = [];
