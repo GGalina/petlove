@@ -1,0 +1,126 @@
+.approveModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(38, 38, 38, 0.4);
+  backdrop-filter: blur(4px);
+
+  &__content {
+    position: relative;
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 40px 32px;
+    border-radius: 24px;
+
+    background-color: $color-white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  &__imgWrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 24px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $color-beige;
+  }
+
+  &__img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+
+  &__title {
+    margin-bottom: 28px;
+
+    font-family: $font-primary;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -3%;
+    color: $color-black;
+
+    @include tablet {
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+
+  &__btnWrapper {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+
+  &__confirmBtn,
+  &__cancelBtn {
+    flex: 1;
+
+    height: 48px;
+    border: none;
+    border-radius: 30px;
+
+    font: $font-primary;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -3%;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    @include tablet {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  &__confirmBtn {
+    background-color: $color-yellow;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-yellow-hover;
+    }
+  }
+
+  &__cancelBtn {
+    background-color: $color-beige;
+    color: $color-black;
+
+    &:hover {
+      background-color: $color-beige-hover;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}

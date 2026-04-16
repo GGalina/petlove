@@ -1,19 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { IoClose } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart, FaStar } from "react-icons/fa6";
+import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa6";
+
 import {
-  addFavoriteThunk,
-  removeFavoriteThunk,
+  addFavoriteLocal,
+  removeFavoriteLocal,
 } from "@/store/favoritesSlice";
+
 import styles from "./ModalNotice.module.scss";
 
 const ModalNotice = ({ isOpen, onClose, notice }) => {
   const dispatch = useDispatch();
+
   const favoriteIds = useSelector((state) => state.favorites.ids);
   const isLoading = useSelector((state) => state.favorites.loading);
-  const isFavorite = favoriteIds.includes(notice._id);
+  const isAuth = useSelector((state) => state.auth.token);
+
+  const isFavorite = favoriteIds.includes(notice?._id);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -22,9 +27,8 @@ const ModalNotice = ({ isOpen, onClose, notice }) => {
 
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleEsc);
     }
-
-    window.addEventListener("keydown", handleEsc);
 
     return () => {
       document.body.style.overflow = "auto";
@@ -34,13 +38,18 @@ const ModalNotice = ({ isOpen, onClose, notice }) => {
 
   if (!isOpen || !notice) return null;
 
-  const handleFavoriteClick = () => {
-    if (isLoading) return;
+  const handleFavoriteClick = async () => {
+    if (!isAuth || isLoading) return;
 
-    if (isFavorite) {
-      dispatch(removeFavoriteThunk(notice._id));
-    } else {
-      dispatch(addFavoriteThunk(notice._id));
+    try {
+      if (isFavorite) {
+        // optimistic update
+        dispatch(removeFavoriteLocal(notice._id));
+      } else {
+        dispatch(addFavoriteLocal(notice._id));
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -79,11 +88,7 @@ const ModalNotice = ({ isOpen, onClose, notice }) => {
             <FaStar
               key={index}
               size={16}
-              color={
-                index < filledStars
-                  ? "#F6B83D"
-                  : "#D9D9D9"
-              }
+              color={index < filledStars ? "#F6B83D" : "#D9D9D9"}
             />
           ))}
 
@@ -93,32 +98,29 @@ const ModalNotice = ({ isOpen, onClose, notice }) => {
         </div>
 
         <div className={styles.modalNotice__infoWrapper}>
-          {["name", "birthday", "sex", "species"].map(
-            (field) => (
-              <div
-                className={styles.modalNotice__infoContainer}
-                key={field}
-              >
-                <p className={styles.modalNotice__infoLabel}>
-                  {field.charAt(0).toUpperCase() +
-                    field.slice(1)}
-                </p>
+          {["name", "birthday", "sex", "species"].map((field) => (
+            <div
+              className={styles.modalNotice__infoContainer}
+              key={field}
+            >
+              <p className={styles.modalNotice__infoLabel}>
+                {field.charAt(0).toUpperCase() + field.slice(1)}
+              </p>
 
-                <p className={styles.modalNotice__infoValue}>
-                  {field === "birthday"
-                    ? formatDate(notice[field])
-                    : notice[field]}
-                </p>
-              </div>
-            )
-          )}
+              <p className={styles.modalNotice__infoValue}>
+                {field === "birthday"
+                  ? formatDate(notice[field])
+                  : notice[field]}
+              </p>
+            </div>
+          ))}
         </div>
 
         <p className={styles.modalNotice__comment}>
           {notice.comment}
         </p>
 
-        {notice.price && notice.price !== 0 && (
+        {notice.price && (
           <p className={styles.modalNotice__price}>
             ${notice.price}
           </p>
@@ -132,13 +134,11 @@ const ModalNotice = ({ isOpen, onClose, notice }) => {
           >
             {isFavorite ? (
               <>
-                Remove from{" "}
-                <FaHeart size={18} color="#FFFFFF" />
+                Remove from <FaHeart size={18} color="#fff" />
               </>
             ) : (
               <>
-                Add to{" "}
-                <FaRegHeart size={18} color="#FFFFFF" />
+                Add to <FaRegHeart size={18} color="#fff" />
               </>
             )}
           </button>
@@ -164,7 +164,7 @@ const ModalNotice = ({ isOpen, onClose, notice }) => {
           className={styles.modalNotice__close}
           onClick={onClose}
         >
-          <IoClose size={24} color="#262626" />
+          <IoClose size={24} />
         </button>
       </div>
     </div>

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
-import styles from "./UserBar.module.scss";
+import styles from "./HomeUserBar.module.scss";
 
-export default function UserBar({onLinkClick}) {
+export default function HomeUserBar({onLinkClick}) {
   const user = useSelector((state) => state.auth.user);
 
   return (
@@ -18,7 +18,7 @@ export default function UserBar({onLinkClick}) {
         ) : (
             <FaUser size={20} className={styles.userBar__icon} />
         )}
-      </div>
+        </div>
 
       <span className={styles.userBar__name}>{user?.name}</span>
     </Link>

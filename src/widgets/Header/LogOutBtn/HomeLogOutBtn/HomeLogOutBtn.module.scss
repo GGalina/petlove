@@ -5,27 +5,31 @@
         font-weight: 700;
         letter-spacing: -3%;
         line-height: 18px;
-        color: $color-yellow;
-        border: none;
+        color: $color-black;
+        border: 1px solid rgba($color-black, 0.4);
         border-radius: 30px;
         padding: 12px;
         width: 100%;
-        background-color: $color-beige;
+        background-color: $color-white;
         cursor: pointer;
         text-transform: uppercase;
+
+        &:hover {
+            border: 1px solid $color-yellow;
+        }
     }
 
     @include tablet {
         &__btn {
-            color: $color-white;
+            color: $color-yellow;
             border: none;
-            background-color: $color-yellow;
+            background-color: $color-beige;
             padding: 15px 35px;
             font-size: 16px;
             line-height: 20px;
 
             &:hover {
-                background-color: $color-yellow-hover;
+                background-color: $color-beige-hover;
                 border: none;
             }
         }

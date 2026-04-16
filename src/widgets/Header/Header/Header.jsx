@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
 import Logo from "@/shared/components/Logo/Logo";
 import Nav from "../Nav/Nav";
 import AuthNav from "../AuthNav/AuthNav";
+import UserNav from "../UserNav/UserNav";
 import styles from "./Header.module.scss";
 
 export default function Header() {
   const [burgerOpen, setBurgerOpen] = useState(false);
+
+  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
+
+  const isAuth = Boolean(token);
 
   const handleLinkClick = () => {
     setBurgerOpen(false);
@@ -25,12 +32,16 @@ export default function Header() {
         </nav>
 
         <div className={styles.header__right}>
-          {/* Tablet + Desktop */}
+          {/* Desktop auth area */}
           <div className={styles.header__userNav}>
-            <AuthNav onLinkClick={handleLinkClick}/>
+            {isAuth ? (
+              <UserNav user={user} onLinkClick={handleLinkClick} />
+            ) : (
+              <AuthNav onLinkClick={handleLinkClick} />
+            )}
           </div>
 
-          {/* Mobile + Tablet */}
+          {/* Burger */}
           <button
             className={styles.header__burger}
             onClick={() => setBurgerOpen(!burgerOpen)}
@@ -40,7 +51,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Backdrop */}
+      {/* Mobile menu */}
       {burgerOpen && (
         <div
           className={styles.header__backdrop}
@@ -54,21 +65,23 @@ export default function Header() {
               className={styles.header__close}
               onClick={() => setBurgerOpen(false)}
             >
-              <RxCross2 size={24} color="white"/>
+              <RxCross2 size={24} color="white" />
             </button>
 
-            {/* Center */}
             <div className={styles.header__mobileCenter}>
               <Nav onLinkClick={handleLinkClick} />
             </div>
 
-            {/* Bottom */}
             <div className={styles.header__mobileBottom}>
-              <AuthNav onLinkClick={handleLinkClick} />
+              {isAuth ? (
+                <UserNav user={user} onLinkClick={handleLinkClick} />
+              ) : (
+                <AuthNav onLinkClick={handleLinkClick} />
+              )}
             </div>
           </div>
         </div>
       )}
     </>
   );
-};
+}

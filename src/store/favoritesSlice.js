@@ -1,66 +1,44 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  addToFavorite,
-  removeFromFavorite,
-} from "@/features/notices/api/noticesApi";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const addFavoriteThunk = createAsyncThunk(
-  "favorites/add",
-  async (id, thunkAPI) => {
-    try {
-      return await addToFavorite(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const removeFavoriteThunk = createAsyncThunk(
-  "favorites/remove",
-  async (id, thunkAPI) => {
-    try {
-      return await removeFromFavorite(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+const initialState = {
+  ids: [],
+  loading: false,
+  error: null,
+};
 
 const favoritesSlice = createSlice({
   name: "favorites",
-  initialState: {
-    ids: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {},
+  initialState,
 
-  extraReducers: (builder) => {
-    builder
-      .addCase(addFavoriteThunk.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(addFavoriteThunk.fulfilled, (state, action) => {
-        state.loading = false;
-        state.ids = action.payload;
-      })
-      .addCase(addFavoriteThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+  reducers: {
+    setFavorites(state, action) {
+      state.ids = (action.payload || []).map((item) => item._id);
+    },
 
-      .addCase(removeFavoriteThunk.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(removeFavoriteThunk.fulfilled, (state, action) => {
-        state.loading = false;
-        state.ids = action.payload;
-      })
-      .addCase(removeFavoriteThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+    addFavoriteLocal(state, action) {
+      const id = action.payload;
+      if (!state.ids.includes(id)) {
+        state.ids.push(id);
+      }
+    },
+
+    removeFavoriteLocal(state, action) {
+      const id = action.payload;
+      state.ids = state.ids.filter((item) => item !== id);
+    },
+
+    clearFavorites(state) {
+      state.ids = [];
+      state.error = null;
+    },
   },
 });
+
+export const {
+  setFavorites,
+  addFavoriteLocal,
+  removeFavoriteLocal,
+  clearFavorites,
+} = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

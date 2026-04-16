@@ -1,29 +1,57 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+
 import ModalAttention from "@/features/notices/components/ModalAttention/ModalAttention";
 import ModalNotice from "@/features/notices/components/ModalNotice/ModalNotice";
+
 import { fetchNoticeById } from "@/features/notices/api/noticesApi";
-import { addFavoriteThunk, removeFavoriteThunk } from "@/store/favoritesSlice";
+
+import {
+  addFavoriteLocal,
+  removeFavoriteLocal,
+} from "@/store/favoritesSlice";
+
 import { FaStar } from "react-icons/fa6";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa6";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+
 import styles from "./NoticesItem.module.scss";
 
 const NoticesItem = ({ notice }) => {
   const dispatch = useDispatch();
+
   const token = useSelector((state) => state.auth.token);
+  const favoriteIds = useSelector((state) => state.favorites.ids);
+
+  const isAuth = Boolean(token);
+  const isFavorite = favoriteIds.includes(notice._id);
+
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
   const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
   const [selectedNotice, setSelectedNotice] = useState(null);
-  const favoriteIds = useSelector((state) => state.favorites.ids);
-  const isFavorite = favoriteIds.includes(notice._id);
-
-  const isAuth = Boolean(token);
 
   const formatDate = (date) => {
     if (!date) return "";
     return new Date(date).toLocaleDateString("en-GB").replace(/\//g, ".");
+  };
+
+  const handleFavoriteClick = async () => {
+    if (!isAuth) {
+      setIsModalAttentionOpen(true);
+      return;
+    }
+
+    try {
+      if (isFavorite) {
+        dispatch(removeFavoriteLocal(notice._id));
+        toast.success("Removed from favorites");
+      } else {
+        dispatch(addFavoriteLocal(notice._id));
+        toast.success("Added to favorites");
+      }
+    } catch (err) {
+      toast.error(err.message || "Something went wrong");
+    }
   };
 
   const handleLearnMore = async () => {
@@ -41,20 +69,6 @@ const NoticesItem = ({ notice }) => {
     }
   };
 
-  const handleFavoriteClick = () => {
-    if (!isAuth) {
-      setIsModalAttentionOpen(true);
-      return;
-    }
-    if (isFavorite) {
-      dispatch(removeFavoriteThunk(notice._id));
-      toast.success("Pet removed from favorites");
-    } else {
-      dispatch(addFavoriteThunk(notice._id));
-      toast.success("Pet added to favorites");
-    }
-  };
-
   return (
     <>
       <div className={styles.noticeItem}>
@@ -65,33 +79,50 @@ const NoticesItem = ({ notice }) => {
         />
 
         <div className={styles.noticeItem__titleWrapper}>
-          <h3 className={styles.noticeItem__title}>{notice.title}</h3>
+          <h3 className={styles.noticeItem__title}>
+            {notice.title}
+          </h3>
+
           <div className={styles.noticeItem__popularityWrapper}>
             <FaStar size={16} color="#F6B83D" />
-            <p className={styles.noticeItem__popularity}>{notice.popularity}</p>
+            <p className={styles.noticeItem__popularity}>
+              {notice.popularity}
+            </p>
           </div>
         </div>
 
         <div className={styles.noticeItem__infoWrapper}>
-          {["name", "birthday", "sex", "species", "category"].map((field) => (
-            <div className={styles.noticeItem__infoContainer} key={field}>
-              <p className={styles.noticeItem__infoLabel}>
-                {field.charAt(0).toUpperCase() + field.slice(1)}
-              </p>
-              <p className={styles.noticeItem__infoValue}>
-                {field === "birthday"
-                  ? formatDate(notice[field])
-                  : notice[field]}
-              </p>
-            </div>
-          ))}
+          {["name", "birthday", "sex", "species", "category"].map(
+            (field) => (
+              <div
+                className={styles.noticeItem__infoContainer}
+                key={field}
+              >
+                <p className={styles.noticeItem__infoLabel}>
+                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                </p>
+
+                <p className={styles.noticeItem__infoValue}>
+                  {field === "birthday"
+                    ? formatDate(notice[field])
+                    : notice[field]}
+                </p>
+              </div>
+            )
+          )}
         </div>
 
         {notice.comment && (
-          <p className={styles.noticeItem__comment}>{notice.comment}</p>
+          <p className={styles.noticeItem__comment}>
+            {notice.comment}
+          </p>
         )}
 
-        {notice.price && <p className={styles.noticeItem__price}>${notice.price}</p>}
+        {notice.price && (
+          <p className={styles.noticeItem__price}>
+            ${notice.price}
+          </p>
+        )}
 
         <div className={styles.noticeItem__actions}>
           <button
@@ -114,13 +145,11 @@ const NoticesItem = ({ notice }) => {
         </div>
       </div>
 
-      {/* Modal for non-auth users */}
       <ModalAttention
         isOpen={isModalAttentionOpen}
         onClose={() => setIsModalAttentionOpen(false)}
       />
 
-      {/* Modal only for logged-in users with fetched notice */}
       {isAuth && selectedNotice && (
         <ModalNotice
           isOpen={isModalNoticeOpen}

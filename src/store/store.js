@@ -2,15 +2,29 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storageImport from "redux-persist/lib/storage";
 
-const storage = storageImport.default;
-
-import authReducer from "./authSlice";
+import { authReducer } from "@/store/auth";
 import favoritesReducer from "./favoritesSlice";
 
+const storage = storageImport.default;
+
+// ✅ persist auth state
+const authPersistConfig = {
+  key: "auth",
+  storage,
+  whitelist: ["token", "user"],
+};
+
+// ✅ persist only favorite ids
 const favoritesPersistConfig = {
   key: "favorites",
   storage,
+  whitelist: ["ids"],
 };
+
+const persistedAuthReducer = persistReducer(
+  authPersistConfig,
+  authReducer
+);
 
 const persistedFavoritesReducer = persistReducer(
   favoritesPersistConfig,
@@ -19,7 +33,7 @@ const persistedFavoritesReducer = persistReducer(
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
+    auth: persistedAuthReducer,
     favorites: persistedFavoritesReducer,
   },
 

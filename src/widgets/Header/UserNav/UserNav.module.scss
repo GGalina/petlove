@@ -1,0 +1,12 @@
+.userNav {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    max-width: 230px;
+    
+    @include tablet {
+        flex-direction: row-reverse;
+        align-items: center;
+        max-width: none;
+    }
+}

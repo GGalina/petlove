@@ -1,0 +1,67 @@
+.userBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+
+
+  &__avatarWrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-beige;
+  }
+
+  &__avatar {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__name {
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: -3%;
+    color: $color-beige;
+  }
+
+ @include tablet {
+    &__avatarWrapper {
+      width: 50px;
+      height: 50px;
+      background: $color-beige;
+      border: none;
+
+      &:hover {
+        background: $color-beige-hover;
+      }
+    }
+
+    &__icon {
+      color: $color-yellow;
+    }
+
+    &__name {
+      font-family: $font-primary;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+      letter-spacing: -3%;
+      color: $color-black;
+
+      &:hover {
+        color: $color-yellow;
+      }
+    }
+  }
+
+}
