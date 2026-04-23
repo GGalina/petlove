@@ -80,12 +80,6 @@ const NoticesPage = () => {
         isLoggedIn={!!isLoggedIn}
       />
 
-      {notices.length === 0 && (
-        <p className={styles.noticesPage__noResults}>
-          No animals found.
-        </p>
-      )}
-
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}

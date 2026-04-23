@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  fetchCurrentUser,
-  logoutUser,
-} from "./authOperations";
+import { fetchCurrentUser, logoutUser } from "./authOperations";
 
 const initialState = {
   token: localStorage.getItem("token") || null,
@@ -16,13 +13,17 @@ const authSlice = createSlice({
   initialState,
 
   reducers: {
-    // ✅ set token immediately after login/register
+    // =========================
+    // SET TOKEN
+    // =========================
     setToken(state, action) {
       state.token = action.payload;
       localStorage.setItem("token", action.payload);
     },
 
-    // ✅ clear all auth data
+    // =========================
+    // CLEAR AUTH
+    // =========================
     clearAuth(state) {
       state.token = null;
       state.user = null;
@@ -31,6 +32,16 @@ const authSlice = createSlice({
 
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+    },
+
+    // =========================
+    // UPDATE USER (includes pets updates)
+    // =========================
+    updateUser(state, action) {
+      state.user = action.payload;
+
+      // optional persistence
+      localStorage.setItem("user", JSON.stringify(action.payload));
     },
   },
 
@@ -48,11 +59,13 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
 
-        // ✅ keep existing token OR fallback to backend token
         state.token =
           state.token ||
           action.payload?.token ||
           localStorage.getItem("token");
+
+        // optional persistence
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
 
       .addCase(fetchCurrentUser.rejected, (state, action) => {
@@ -89,5 +102,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, clearAuth } = authSlice.actions;
+export const { setToken, clearAuth, updateUser } = authSlice.actions;
 export default authSlice.reducer;

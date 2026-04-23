@@ -1,48 +1,464 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  max-width: 400px;
+  background-color: $color-white;
+  border-radius: 30px;
+  border: none;
+  padding: 28px 20px 20px 20px;
 
-  .field {
-    display: flex;
-    flex-direction: column;
+  @include tablet {
+    padding: 40px 136px;
+  }
 
-    label {
-      margin-bottom: 4px;
-      font-weight: 500;
-    }
+  @include desktop {
+    padding: 60px 80px;
+  }
 
-    input,
-    select {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
+  &__title {
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 28px;
+    letter-spacing: -3%;
+    color: $color-black;
 
-    .error {
-      color: red;
-      font-size: 12px;
-      margin-top: 2px;
+    @include tablet {
+      font-size: 32px;
+      line-height: 32px;
     }
   }
 
-  .buttons {
+  &__subTitle {
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba($color-black, 0.4);
+
+    @include tablet {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  /* ================= SEX ================= */
+
+  &__sex {
     display: flex;
-    justify-content: space-between;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    gap: 12px;
+  }
 
-    button {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
+  &__sexItem input {
+    display: none;
+  }
 
-      &:hover {
-        opacity: 0.9;
+  &__circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: inherit;
+
+    @include tablet {
+      width: 40px;
+      height: 40px;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      stroke: currentColor;
+
+      @include tablet {
+        width: 24px;
+        height: 24px;
       }
     }
+  }
+
+  &__circle--female {
+    background-color: rgba(244, 63, 94, 0.12);
+    color: #F43F5E;
+  }
+
+  &__sexItem:hover &__circle--female,
+  &__sexItem input:checked + &__circle--female {
+    background-color: #F43F5E;
+    color: $color-white;
+  }
+
+  &__circle--male {
+    background-color: rgba(84, 173, 255, 0.12);
+    color: #54ADFF;
+  }
+
+  &__sexItem:hover &__circle--male,
+  &__sexItem input:checked + &__circle--male {
+    background-color: #54ADFF;
+    color: $color-white;
+  }
+
+  &__circle--other {
+    background-color: $color-beige;
+    color: $color-yellow;
+  }
+
+  &__sexItem:hover &__circle--other,
+  &__sexItem input:checked + &__circle--other {
+    background-color: $color-yellow;
+    color: $color-white;
+  }
+
+  &__circle:hover {
+    transform: scale(1.06);
+  }
+
+  /* ================= IMAGE ================= */
+
+  &__imageWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  &__image {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background-color: $color-beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+
+    @include tablet {
+      width: 86px;
+      height: 86px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    svg {
+      color: $color-yellow;
+    }
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-yellow;
+  }
+
+  /* ================= IMAGE INPUT ================= */
+
+  &__imageUrl {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+
+    input {
+      flex: 1 1 0; 
+      min-width: 0;
+      border: 1px solid rgba($color-black, 0.15);
+      padding: 12px;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+
+      @include desktop {
+        padding: 16px;
+      }
+
+      &:focus {
+        border-color: $color-yellow;
+      }
+    }
+  }
+
+  &__upload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 30px;
+    background-color: $color-beige;
+    color: $color-yellow;
+    cursor: pointer;
+
+    svg {
+      color: $color-yellow;
+    }
+  }
+
+  &__uploadText {
+    font-family: $font-primary;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -2%;
+    color: $color-black;
+
+    @include tablet {
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  /* ================= INPUT ================= */
+
+  &__input {
+    width: 100%;
+    border: 1px solid rgba($color-black, 0.15);
+    padding: 10px;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    outline: none;
+
+    @include desktop {
+      padding: 16px;
+    }
+
+    &:focus {
+      border-color: $color-yellow;
+    }
+  }
+
+  /* ================= ROW ================= */
+
+  &__row {
+    display: flex;
+    gap: 8px;
+
+    > * {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  /* ================= DATE PICKER ================= */
+
+  &__dateWrapper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+
+  }
+
+  &__datePicker {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    border: 1px solid rgba($color-black, 0.15);
+    border-radius: 30px;
+    padding: 0 40px 0 16px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    
+    &:focus {
+      border-color: $color-yellow;
+    }
+
+    &::placeholder {
+      color: rgba($color-black, 0.4);
+    }
+  }
+
+  &__dateIcon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-black;
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  /* ================= DATEPICKER REACT ================= */
+
+  :global(.react-datepicker-wrapper) {
+    width: 100%;
+    min-width: 0;
+    display: block; 
+  }
+
+  :global(.react-datepicker__input-container) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  :global(.react-datepicker) {
+    border-radius: 16px;
+    border: none;
+    font-family: $font-primary;
+  }
+
+  :global(.react-datepicker__header) {
+    background-color: $color-white;
+    border-bottom: none;
+  }
+
+  :global(.react-datepicker__day) {
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  :global(.react-datepicker__day:hover) {
+    background-color: rgba($color-yellow, 0.2);
+  }
+
+  :global(.react-datepicker__day--selected) {
+    background-color: $color-yellow !important;
+    color: $color-white !important;
+  }
+
+  :global(.react-datepicker__day--keyboard-selected) {
+    background-color: rgba($color-yellow, 0.4);
+  }
+
+  /* ================= TYPE SELECT================= */
+
+  &__select {
+    width: 100%;
+  }
+
+  :global(.select__control) {
+    height: 44px;
+    min-height: 44px;
+    padding: 0 10px;
+    border-radius: 30px;
+    border: 1px solid rgba($color-black, 0.15);
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-yellow;
+      outline: none;
+    }
+  }
+
+  :global(.select__value-container) {
+    padding: 0;
+  }
+
+  :global(.select__input-container) {
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(.select__indicator-separator) {
+    display: none;
+  }
+
+  :global(.select__dropdown-indicator) {
+    color: $color-black;
+
+    &:hover {
+      color: $color-yellow;
+    }
+  }
+
+  :global(.select__menu) {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  :global(.select__option) {
+    color: rgba($color-black, 0.6);
+    cursor: pointer;
+
+    &:hover {
+      color: $color-yellow;
+    }
+  }
+
+  :global(.select__option--is-focused) {
+    color: $color-yellow !important;
+    background-color: transparent;
+  }
+
+  :global(.select__placeholder) {
+    color: rgba($color-black, 0.4);
+  }
+
+  /* ================= BUTTONS ================= */
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 30px;
+  }
+
+  &__backBtn {
+    cursor: pointer;
+    color: $color-black;
+    padding: 12px 34px;
+    background-color: rgba($color-black, 0.05);
+    border: none;
+    border-radius: 30px;
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -3%;
+
+    @include tablet {
+      padding: 14px 67px;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    &:hover {
+      background-color: rgba($color-black, 0.1);
+    }
+  }
+
+  &__submitBtn {
+    cursor: pointer;
+    cursor: pointer;
+    color: $color-white;
+    padding: 12px 26px;
+    background-color: $color-yellow;
+    border: none;
+    border-radius: 30px;
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -3%;
+
+    @include tablet {
+      padding: 14px 58px;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    &:hover {
+      background-color: $color-yellow-hover;
+    }
+  }
+
+  /* ================= ERROR ================= */
+
+  &__error {
+    color: $color-error;
+    font-size: 12px;
+    margin-top: 4px;
+    padding-left: 10px;
   }
 }

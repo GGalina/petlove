@@ -25,6 +25,10 @@
     display: block;
   }
 
+  &__icon {
+    color: $color-yellow;
+  }
+
   &__name {
     font-family: $font-primary;
     font-weight: 700;
@@ -63,5 +67,4 @@
       }
     }
   }
-
 }
