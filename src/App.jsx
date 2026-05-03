@@ -1,6 +1,10 @@
+import { useEffect, useRef } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentUser } from "@/store/auth/authOperations";
+import { selectToken } from "@/store/auth/authSelectors";
 
 import MainLayout from "@/layouts/MainLayout";
 import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
@@ -21,6 +25,18 @@ import NotFoundPage from "@/features/notfound/pages/NotFoundPage";
 import PrivateRoute from "@/routes/PrivateRoute";
 
 export default function App() {
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const didFetchRef = useRef(false);
+
+  useEffect(() => {
+    if (!token) return;
+    if (didFetchRef.current) return;
+
+    didFetchRef.current = true;
+    dispatch(fetchCurrentUser());
+  }, [token, dispatch]);
+
   return (
     <>
       <Routes>

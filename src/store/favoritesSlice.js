@@ -12,11 +12,20 @@ const favoritesSlice = createSlice({
 
   reducers: {
     setFavorites(state, action) {
-      state.ids = (action.payload || []).map((item) => item._id);
+      const items = action.payload || [];
+
+      // keep only valid ids
+      state.ids = items
+        .map((item) => item?._id)
+        .filter(Boolean);
     },
 
     addFavoriteLocal(state, action) {
       const id = action.payload;
+
+      // 🔴 guard against undefined/null
+      if (!id) return;
+
       if (!state.ids.includes(id)) {
         state.ids.push(id);
       }
@@ -24,6 +33,9 @@ const favoritesSlice = createSlice({
 
     removeFavoriteLocal(state, action) {
       const id = action.payload;
+
+      if (!id) return;
+
       state.ids = state.ids.filter((item) => item !== id);
     },
 

@@ -53,4 +53,42 @@
   </g>
 </symbol>
 
+<!-- EDIT USER -->
+<symbol id="icon-edit-user" viewBox="0 0 50 50">
+  <path
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    d="M41.667 17.167L15.083 43.75H6.25v-8.833L32.833 8.333a6.25 6.25 0 0 1 8.834 0v0a6.25 6.25 0 0 1 0 8.834"
+  />
+</symbol>
+
+<!-- USER -->
+<symbol id="icon-user" viewBox="0 0 24 24">
+  <path
+    fill="currentColor"
+    d="M12 2a5 5 0 1 0 0 10a5 5 0 1 0 0-10M4 22h16c.55 0 1-.45 1-1v-1c0-3.86-3.14-7-7-7h-4c-3.86 0-7 3.14-7 7v1c0 .55.45 1 1 1"
+  />
+</symbol>
+
+<!-- PLUS -->
+<symbol id="icon-plus" viewBox="0 0 24 24">
+  <path
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    d="M12 5v14M5 12h14"
+  />
+</symbol>
+
+<!-- TRASH -->
+<symbol id="icon-trash" viewBox="0 0 24 24">
+  <path
+    fill="currentColor"
+    d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-6.287 10.713Q11 16.425 11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17t.713-.288m4 0Q15 16.426 15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17t.713-.288M7 6v13z"
+  />
+</symbol>
+
 </svg>

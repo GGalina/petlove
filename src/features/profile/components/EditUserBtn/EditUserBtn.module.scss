@@ -1,0 +1,18 @@
+.editBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+    border-radius: 30px;
+    border: none;
+    background-color: $color-beige;
+    cursor: pointer;
+
+    color: $color-yellow;
+
+    &:hover {
+        background-color: $color-beige-hover;
+    }
+}

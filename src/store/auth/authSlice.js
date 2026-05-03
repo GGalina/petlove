@@ -13,17 +13,11 @@ const authSlice = createSlice({
   initialState,
 
   reducers: {
-    // =========================
-    // SET TOKEN
-    // =========================
     setToken(state, action) {
       state.token = action.payload;
       localStorage.setItem("token", action.payload);
     },
 
-    // =========================
-    // CLEAR AUTH
-    // =========================
     clearAuth(state) {
       state.token = null;
       state.user = null;
@@ -31,25 +25,15 @@ const authSlice = createSlice({
       state.isLoading = false;
 
       localStorage.removeItem("token");
-      localStorage.removeItem("user");
     },
 
-    // =========================
-    // UPDATE USER (includes pets updates)
-    // =========================
     updateUser(state, action) {
       state.user = action.payload;
-
-      // optional persistence
-      localStorage.setItem("user", JSON.stringify(action.payload));
     },
   },
 
   extraReducers: (builder) => {
     builder
-      // =========================
-      // FETCH CURRENT USER
-      // =========================
       .addCase(fetchCurrentUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -57,15 +41,22 @@ const authSlice = createSlice({
 
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+
+        const data = action.payload;
+
+        // ✅ keep ONLY user info
+        state.user = {
+          _id: data._id,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          avatar: data.avatar,
+        };
 
         state.token =
           state.token ||
-          action.payload?.token ||
+          data?.token ||
           localStorage.getItem("token");
-
-        // optional persistence
-        localStorage.setItem("user", JSON.stringify(action.payload));
       })
 
       .addCase(fetchCurrentUser.rejected, (state, action) => {
@@ -75,12 +66,8 @@ const authSlice = createSlice({
         state.user = null;
 
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
       })
 
-      // =========================
-      // LOGOUT
-      // =========================
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -90,9 +77,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.token = null;
         state.user = null;
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
       })
 
       .addCase(logoutUser.rejected, (state, action) => {

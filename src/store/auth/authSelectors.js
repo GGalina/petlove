@@ -8,3 +8,9 @@ export const selectError = state => state.auth.error;
 
 export const selectIsLoggedIn = state =>
   Boolean(state.auth.token);
+
+export const selectPets = (state) => state.pets.items;
+
+export const favoriteIds = (state) => state.favorites.ids;
+
+export const selectViewed = (state) => state.viewed.items;

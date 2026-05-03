@@ -1,0 +1,140 @@
+.userBlock {
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        padding: 10px 14px;
+        border-radius: 30px;
+        border: none;
+        background-color: $color-yellow;
+        color: $color-white;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: -2%;
+    }
+
+    &__avatarWrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    &__avatar {
+        width: 94px;
+        height: 94px;
+        border-radius: 50%;
+        object-fit: cover;
+
+        @include tablet {
+            width: 110px;
+            height: 110px;
+        }
+    }
+
+    &__avatarFallback {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__avatarFallbackWrapper {
+        width: 94px;
+        height: 94px;
+        border-radius: 50%;
+        background-color: $color-beige;
+        color: $color-yellow;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        @include tablet {
+            width: 110px;
+            height: 110px;
+        }
+    }
+
+    &__uploadLink {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: -2%;
+        color: $color-black;
+        margin-top: 8px;
+        cursor:pointer;
+
+        @include tablet {
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        &:hover {
+            color: $color-yellow;
+        }
+    }
+
+    &__title {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: $color-black;
+
+        @include tablet {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+
+    &__fields {
+        display: grid;
+        gap: 12px;
+
+        @include tablet {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__field {
+        padding: 12px;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: -3%;
+        border-radius: 30px;
+        border: 1px solid $color-yellow;
+        background-color: $color-white;
+
+        @include tablet {
+            padding: 16px;
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
+    &__fieldEmpty {
+        padding: 12px;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: -3%;
+        border-radius: 30px;
+        border: 1px solid rgba($color-black, 0.15);
+        background-color: $color-white;
+
+        @include tablet {
+            padding: 16px;
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
+}

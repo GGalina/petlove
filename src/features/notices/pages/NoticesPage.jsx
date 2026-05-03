@@ -9,12 +9,22 @@ import Loader from "@/shared/components/Loader/Loader";
 
 import { fetchNotices } from "@/features/notices/api/noticesApi";
 
+import { selectIsLoggedIn } from "@/store/auth/authSelectors";
+
 import styles from "./NoticesPage.module.scss";
 
 const NoticesPage = () => {
-  const favoriteIds = useSelector((state) => state.favorites.ids);
-  const isLoggedIn = useSelector((state) => state.auth.user);
+  // =========================
+  // SELECTORS (SAFE)
+  // =========================
+  const favoriteIds =
+    useSelector((state) => state.favorites.ids) || [];
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  // =========================
+  // LOCAL STATE
+  // =========================
   const [notices, setNotices] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -32,10 +42,14 @@ const NoticesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  // reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [filters]);
 
+  // =========================
+  // FETCH DATA
+  // =========================
   const loadNotices = async () => {
     setLoading(true);
 
@@ -45,8 +59,8 @@ const NoticesPage = () => {
         page: currentPage,
       });
 
-      setNotices(data);
-      setTotalPages(totalPages);
+      setNotices(data || []);
+      setTotalPages(totalPages || 1);
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
@@ -60,6 +74,9 @@ const NoticesPage = () => {
     loadNotices();
   }, [filters, currentPage]);
 
+  // =========================
+  // LOADING STATE
+  // =========================
   if (loading) {
     return (
       <div className={styles.noticesPage}>
@@ -68,6 +85,9 @@ const NoticesPage = () => {
     );
   }
 
+  // =========================
+  // UI
+  // =========================
   return (
     <div className={styles.noticesPage}>
       <Title text="Find your favorite pet" className={styles.customTitle} />
@@ -77,7 +97,7 @@ const NoticesPage = () => {
       <NoticesList
         notices={notices}
         favoriteIds={favoriteIds}
-        isLoggedIn={!!isLoggedIn}
+        isLoggedIn={isLoggedIn}
       />
 
       {totalPages > 1 && (

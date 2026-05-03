@@ -14,6 +14,7 @@ import { addPet } from "@/features/pets/api/petsApi";
 import { updateUser } from "@/store/auth/authSlice";
 import { uploadImageToCloudinary } from "@/features/pets/api/uploadImage";
 import styles from "./AddPetForm.module.scss";
+import { toast } from "react-toastify";
 
 
 // FORMAT FOR BACKEND YYYY-MM-DD
@@ -136,7 +137,7 @@ export default function AddPetForm() {
         </label>
 
         <label className={styles.form__sexItem}>
-          <input type="radio" value="other" {...register("sex")} />
+          <input type="radio" value="unknown" {...register("sex")} />
           <span className={`${styles.form__circle} ${styles["form__circle--other"]}`}>
             <Icon name="icon-male-alt" width={20} height={20} />
           </span>

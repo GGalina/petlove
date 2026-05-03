@@ -1,0 +1,14 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include desktop {
+    grid-template-columns: 1fr;
+  }
+}

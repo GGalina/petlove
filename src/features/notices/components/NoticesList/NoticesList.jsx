@@ -5,7 +5,7 @@ const NoticesList = ({ notices, favoriteIds = [], isLoggedIn }) => {
   if (!notices || notices.length === 0) {
     return <p className={styles.noResults}>No animals found.</p>;
   }
-
+console.log("favoriteIds:", favoriteIds);
   return (
     <div className={styles.noticeList}>
       {notices.map((notice) => {

@@ -1,0 +1,96 @@
+.petsItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+
+  padding: 16px;
+  border-radius: 20px;
+  background: $color-white;
+  border: 1px solid rgba($color-black, 0.1);
+
+  @include tablet {
+    padding: 22px 16px;
+  }
+
+  @include desktop {
+    padding: 20px;
+  }
+
+  &__image {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    @include tablet {
+      width: 75px;
+      height: 75px;
+    }
+
+    @include desktop {
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  &__infoWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -2%;
+    color: rgba($color-black, 0.5);
+  }
+
+  &__value {
+    font-size: 12px;
+    line-height: 14px;
+    color: $color-black;
+    letter-spacing: -2%;
+    font-weight: 500;
+  }
+
+  &__deleteBtn {
+    border: none;
+    background-color: $color-beige;
+    color: $color-yellow;
+    border-radius: 50%;
+    padding: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+  }
+}

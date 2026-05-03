@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import { logoutUser } from "@/store/auth/authOperations";
 import catImg from "@/assets/images/catlogout.png";
 import styles from "./ModalApproveAction.module.scss";
+import { toast } from "react-toastify";
 
 export default function ModalApproveAction({ onClose }) {
   const dispatch = useDispatch();
@@ -44,15 +45,16 @@ export default function ModalApproveAction({ onClose }) {
   const handleApprove = async () => {
     if (isLoading) return;
 
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
       await dispatch(logoutUser()).unwrap();
-      navigate("/", { replace: true });
-      onClose();
     } catch (error) {
-      console.error("Logout failed:", error);
+      toast.error(error.message || "Logout failed");
     } finally {
       setIsLoading(false);
+      onClose();
+      navigate("/", { replace: true });
     }
   };
 
